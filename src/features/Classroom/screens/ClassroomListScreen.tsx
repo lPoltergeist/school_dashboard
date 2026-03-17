@@ -1,5 +1,5 @@
-import { Box, Text } from '@gluestack-ui/themed';
-import { ActivityIndicator, Alert } from 'react-native';
+import { Box, Center, Heading, SearchIcon, Spinner, Text, VStack } from '@gluestack-ui/themed';
+import { Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ClassroomCard } from '@/features/Classroom/components/ClassroomCard';
@@ -15,9 +15,9 @@ import {
 } from 'expo-router';
 import React, { useEffect, useLayoutEffect, useState } from 'react';
 
-import { ClassroomListStyles } from '@/features/Classroom/styles/ClassRoomListScreen.style';
-import { useDebounce } from '@/hooks/debounced-filter';
-import { useHaptic } from '@/hooks/use-hapitics';
+import { useDebounce } from '@/hooks/use-debounce';
+import { useHaptic } from '@/hooks/use-haptics';
+import { ListEmptyComponent } from '@/utils/emptyList';
 import {
   Input,
   InputField,
@@ -89,42 +89,45 @@ export default function ClassroomListScreen() {
   );
 
   return (
-    <SafeAreaView style={ClassroomListStyles.container}>
-      <Box
-        bg="$white"
-        p="$4"
-        borderRadius="$xl"
-        borderWidth={1}
-        borderColor="$borderLight200"
-      >
-        <Text style={ClassroomListStyles.title}>Turmas</Text>
-        <Text style={ClassroomListStyles.subtitle}>
-          Gerencie as suas turmas
-        </Text>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#F8F9FA' }}>
+      <Box bg="$white" px="$4" pb="$4" pt="$2" borderBottomWidth={1} borderColor="$borderLight100">
+        <VStack space="xs">
+          <Heading size="2xl" color="$emerald900" fontWeight="$extrabold">
+            Turmas
+          </Heading>
+          <Text size="md" color="$textLight500">
+            Gerencie as turmas desta instituição
+          </Text>
+        </VStack>
       </Box>
 
-      <Input variant="outline" size="md" margin={16}>
-        <InputIcon ml="$3" />
-        <InputField
-          placeholder="Pesquisar turma pelo nome..."
-          value={search}
-          onChangeText={setSearch}
-        />
-      </Input>
+      <Box px="$4" py="$3">
+        <Input variant="outline" size="xl" bg="$white" borderRadius="$xl">
+          <InputIcon ml="$3" as={SearchIcon} color="$emerald600" />
+          <InputField
+            placeholder="Pesquisar turma pelo nome..."
+            value={search}
+            onChangeText={setSearch}
+          />
+        </Input>
+      </Box>
 
       {isLoading ? (
-        <ActivityIndicator size="large" color="#2563Eb" style={{ flex: 1 }} />
+        <Center flex={1}>
+          <Spinner size="large" color="$emerald500" />
+        </Center>
       ) : (
         <FlashList
           data={classes}
           renderItem={renderItem}
-          contentContainerStyle={ClassroomListStyles.listContent}
+          contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
-          getItemType={(item) => item.id}
+          ListEmptyComponent={ListEmptyComponent}
           keyExtractor={(item) => item.id}
           removeClippedSubviews={true}
         />
       )}
+
     </SafeAreaView>
   );
 }

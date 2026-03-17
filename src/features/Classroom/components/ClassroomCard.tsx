@@ -1,7 +1,6 @@
 import { useHaptic } from '@/hooks/use-haptics';
-import { ClassroomCardStyles } from '@features/Classroom/styles/ClassroomCard.styles';
 import { Classroom } from '@features/Classroom/types/class';
-import { Box, Button, Text } from '@gluestack-ui/themed';
+import { Box, Button, ButtonText, HStack, Text, VStack } from '@gluestack-ui/themed';
 import React from 'react';
 
 interface ClassroomCardProps {
@@ -19,58 +18,70 @@ export const ClassroomCard = React.memo(
         p="$4"
         borderRadius="$xl"
         borderWidth={1}
-        borderColor="$borderLight200"
-        style={ClassroomCardStyles.cardContainer}
+        borderColor="$borderLight100"
+        mb="$4"
+        softShadow="1"
       >
-        <Box>
-          <Text style={ClassroomCardStyles.classroomName}>{item.name}</Text>
-          <Text style={ClassroomCardStyles.classroomAddress}>{item.shift}</Text>
-          <Box style={ClassroomCardStyles.classroomBadge}>
-            <Text style={ClassroomCardStyles.classroomBadgeText}>
+        <VStack space="xs" mb="$4">
+          <Text size="xl" fontWeight="$bold" color="$emerald900">
+            {item.name}
+          </Text>
+          <Text size="sm" color="$textLight500">
+            Turno: {item.shift}
+          </Text>
+
+          <Box
+            bg="$emerald50"
+            alignSelf="flex-start"
+            px="$2"
+            py="$1"
+            borderRadius="$md"
+            mt="$2"
+          >
+            <Text size="xs" fontWeight="$semibold" color="$emerald600">
               Ano letivo: {item.school_year}
             </Text>
           </Box>
-        </Box>
+        </VStack>
 
-        <Box style={ClassroomCardStyles.cardActions}>
+        <HStack
+          flexDirection="row-reverse"
+          gap="$3"
+          borderTopWidth={1}
+          borderColor="$borderLight50"
+          pt="$4"
+        >
           <Button
-            style={[
-              ClassroomCardStyles.button,
-              ClassroomCardStyles.buttonDelete,
-            ]}
+            flex={1}
+            size="sm"
+            bg="$emerald500"
+            borderRadius="$lg"
             onPress={() => {
-              (trigger('heavy'), onDelete(item.id));
+              trigger('light');
+              onEdit(item);
             }}
           >
-            <Text
-              style={[
-                ClassroomCardStyles.buttonDeleteText,
-                ClassroomCardStyles.buttonText,
-              ]}
-            >
+            <ButtonText fontWeight="$bold">Editar Turma</ButtonText>
+          </Button>
+
+          <Button
+            flex={1}
+            size="sm"
+            variant="outline"
+            action="negative"
+            borderColor="$red200"
+            bg="$red50"
+            borderRadius="$lg"
+            onPress={() => {
+              trigger('heavy');
+              onDelete(item.id);
+            }}
+          >
+            <ButtonText color="$red600" fontWeight="$bold">
               Deletar
-            </Text>
+            </ButtonText>
           </Button>
-
-          <Button
-            style={[
-              ClassroomCardStyles.button,
-              ClassroomCardStyles.buttonPrimary,
-            ]}
-            onPress={() => {
-              (trigger('light'), onEdit(item));
-            }}
-          >
-            <Text
-              style={[
-                ClassroomCardStyles.buttonPrimaryText,
-                ClassroomCardStyles.buttonText,
-              ]}
-            >
-              Editar Turma
-            </Text>
-          </Button>
-        </Box>
+        </HStack>
       </Box>
     );
   },

@@ -1,4 +1,3 @@
-// components/HeaderCreateButton.tsx
 import { useClassroomStore } from '@features/Classroom/store/useClassroomStore';
 import { useSchoolsStore } from '@features/Schools/store/useSchoolStore';
 import { RelativePathString, router } from 'expo-router';
@@ -22,5 +21,5 @@ export const HeaderCreateButton = ({
     router.push({ pathname: path as RelativePathString, params: params });
   };
 
-  return <Button title={label} onPress={handlePress} />;
+  return <Button title={label} onPress={handlePress} color={'#059669'} />;
 };

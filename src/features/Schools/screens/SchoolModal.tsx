@@ -1,5 +1,5 @@
 import { School } from '@/features/Schools/types/school';
-import { useHaptic } from '@/hooks/use-hapitics';
+import { useHaptic } from '@/hooks/use-haptics';
 import { useSchoolsStore } from '@features/Schools/store/useSchoolStore';
 import {
   Box,
@@ -24,6 +24,8 @@ export default function SchoolModal() {
   const [address, setAddress] = useState(selectedSchool?.address || '');
 
   const { trigger } = useHaptic();
+
+  const backgroundButtonColor = '#059669'
 
   const handleSave = async () => {
     if (!name || !address) {
@@ -73,6 +75,7 @@ export default function SchoolModal() {
           onPress={() => {
             (trigger('success'), handleSave());
           }}
+          bgColor={backgroundButtonColor}
           mt="$4"
         >
           <ButtonText>Salvar Escola</ButtonText>
@@ -81,6 +84,7 @@ export default function SchoolModal() {
           onPress={() => {
             (trigger('light'), handleGoBack());
           }}
+          bgColor={backgroundButtonColor}
           mt="$4"
         >
           <ButtonText>Voltar</ButtonText>

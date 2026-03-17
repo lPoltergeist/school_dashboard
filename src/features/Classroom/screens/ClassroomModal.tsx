@@ -1,4 +1,4 @@
-import { useHaptic } from '@/hooks/use-hapitics';
+import { useHaptic } from '@/hooks/use-haptics';
 import { useClassroomStore } from '@features/Classroom/store/useClassroomStore';
 import { Classroom } from '@features/Classroom/types/class';
 import {
@@ -32,6 +32,8 @@ export default function ClassroomModal() {
 
   const { trigger } = useHaptic();
 
+  const backgroundButtonColor = '#059669'
+
   const handleSave = async () => {
     if (!name || !shift || !year) {
       alert('Por favor, preencha todos os campos corretamente.');
@@ -56,6 +58,7 @@ export default function ClassroomModal() {
     clearSelectedClasses();
     router.back();
   };
+
 
   const handleGoBack = () => {
     clearSelectedClasses();
@@ -100,6 +103,7 @@ export default function ClassroomModal() {
           onPress={() => {
             (trigger('success'), handleSave());
           }}
+          bgColor={backgroundButtonColor}
           mt="$4"
         >
           <ButtonText>Salvar Turma</ButtonText>
@@ -108,6 +112,8 @@ export default function ClassroomModal() {
           onPress={() => {
             (trigger('light'), handleGoBack());
           }}
+          bgColor={backgroundButtonColor}
+          collapsable
           mt="$4"
         >
           <ButtonText>Voltar</ButtonText>

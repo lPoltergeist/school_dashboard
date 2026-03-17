@@ -1,10 +1,9 @@
-import { ActivityIndicator, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { School } from '@/features/Schools/types/school';
 import { SchoolCard } from '@features/Schools/components/SchoolCard';
 import { useSchoolsStore } from '@features/Schools/store/useSchoolStore';
-import { ListScreenStyles } from '@features/Schools/styles/SchoolListScreen.style';
 import { FlashList } from '@shopify/flash-list';
 import {
   RelativePathString,
@@ -19,8 +18,10 @@ import React, {
   useState,
 } from 'react';
 
-import { useDebounce } from '@/hooks/debounced-filter';
-import { useHaptic } from '@/hooks/use-hapitics';
+import { useDebounce } from '@/hooks/use-debounce';
+import { useHaptic } from '@/hooks/use-haptics';
+import { ListEmptyComponent } from '@/utils/emptyList';
+import { Box, Center, Heading, SearchIcon, Spinner, Text, VStack } from '@gluestack-ui/themed';
 import {
   Input,
   InputField,
@@ -92,29 +93,48 @@ export default function SchoolListScreen() {
   );
 
   return (
-    <SafeAreaView style={ListScreenStyles.container}>
-      <Input variant="outline" size="md" margin={16}>
-        <InputIcon ml="$3" />
-        <InputField
-          placeholder="Pesquisar escola pelo nome..."
-          value={search}
-          onChangeText={setSearch}
-        />
-      </Input>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#F8F9FA' }}>
+      {/* Header Compacto (Seguindo o ajuste que fizemos no print) */}
+      <Box bg="$white" px="$6" pb="$4" pt="$2" borderBottomWidth={1} borderColor="$borderLight100">
+        <VStack space="xs">
+          <Heading size="2xl" color="$emerald900" fontWeight="$extrabold">
+            Escolas
+          </Heading>
+          <Text size="md" color="$textLight500">
+            Gerencie as instituições de ensino
+          </Text>
+        </VStack>
+      </Box>
 
+      {/* Busca */}
+      <Box px="$4" py="$3">
+        <Input variant="outline" size="xl" bg="$white" borderRadius="$xl">
+          <InputIcon ml="$3" as={SearchIcon} color="$emerald600" />
+          <InputField
+            placeholder="Pesquisar escola pelo nome..."
+            value={search}
+            onChangeText={setSearch}
+          />
+        </Input>
+      </Box>
+
+      {/* Lista ou Loading */}
       {isLoading ? (
-        <ActivityIndicator size="large" color="#2563Eb" style={{ flex: 1 }} />
+        <Center flex={1}>
+          <Spinner size="large" color="$emerald500" />
+        </Center>
       ) : (
         <FlashList
           data={schools}
           renderItem={renderItem}
-          contentContainerStyle={ListScreenStyles.listContent}
+          contentContainerStyle={{ padding: 16, paddingBottom: 100 }}
           showsVerticalScrollIndicator={false}
-          getItemType={(item) => item.id}
+          ListEmptyComponent={ListEmptyComponent}
           keyExtractor={(item) => item.id}
           removeClippedSubviews={true}
         />
       )}
+
     </SafeAreaView>
   );
 }
