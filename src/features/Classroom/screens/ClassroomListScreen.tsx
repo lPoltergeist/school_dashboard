@@ -102,7 +102,8 @@ export default function ClassroomListScreen() {
       </Box>
 
       <Box px="$4" py="$3">
-        <Input variant="outline" size="xl" bg="$white" borderRadius="$xl">
+        <Input variant="outline" size="xl" bg="$white" borderRadius="$xl" alignItems="center"
+          justifyContent="center">
           <InputIcon ml="$3" as={SearchIcon} color="$emerald600" />
           <InputField
             placeholder="Pesquisar turma pelo nome..."

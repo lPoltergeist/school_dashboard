@@ -68,3 +68,10 @@ Qualidade de Código:
 A camada de API é interceptada pelo MSW em ambiente de desenvolvimento. Os dados são manipulados em memória e persistidos localmente via Zustand + AsyncStorage.
 
     Os arquivos de definição dos endpoints estão em src/mocks/handlers.ts.
+
+
+🌟 Diferenciais
+- Arquitetura baseada em Features (Scalable Folder Structure).
+- Hooks customizados (Debounce, Haptics).
+- Feedback sensorial com Haptic Feedback em ações críticas.
+- Lista de alta performance utilizando FlashList (@shopify/flash-list).

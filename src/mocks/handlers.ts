@@ -22,7 +22,7 @@ const INITIAL_CLASSES = [
   {
     id: '101',
     schoolId: '1',
-    name: 'Matematica',
+    name: 'Matemática',
     shift: 'Manha',
     school_year: 2026,
   },

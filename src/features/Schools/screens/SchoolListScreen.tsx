@@ -94,7 +94,6 @@ export default function SchoolListScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F8F9FA' }}>
-      {/* Header Compacto (Seguindo o ajuste que fizemos no print) */}
       <Box bg="$white" px="$6" pb="$4" pt="$2" borderBottomWidth={1} borderColor="$borderLight100">
         <VStack space="xs">
           <Heading size="2xl" color="$emerald900" fontWeight="$extrabold">
@@ -106,9 +105,9 @@ export default function SchoolListScreen() {
         </VStack>
       </Box>
 
-      {/* Busca */}
       <Box px="$4" py="$3">
-        <Input variant="outline" size="xl" bg="$white" borderRadius="$xl">
+        <Input variant="outline" size="xl" bg="$white" borderRadius="$xl" alignItems="center"
+          justifyContent="center">
           <InputIcon ml="$3" as={SearchIcon} color="$emerald600" />
           <InputField
             placeholder="Pesquisar escola pelo nome..."
@@ -118,7 +117,6 @@ export default function SchoolListScreen() {
         </Input>
       </Box>
 
-      {/* Lista ou Loading */}
       {isLoading ? (
         <Center flex={1}>
           <Spinner size="large" color="$emerald500" />
