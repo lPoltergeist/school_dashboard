@@ -1,0 +1,41 @@
+import { StyleSheet } from 'react-native';
+
+export const ListScreenStyles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#F8F9FA' },
+  header: { padding: 20, paddingTop: 40 },
+  title: { fontSize: 28, fontWeight: '800', color: '#1E293B' },
+  subtitle: { fontSize: 16, color: '#64748B', marginTop: 4 },
+  listContent: { padding: 20, paddingBottom: 100 },
+  card: {
+    backgroundColor: '#FFF',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+  },
+  cardHeader: { marginBottom: 16 },
+  schoolName: { fontSize: 20, fontWeight: '700', color: '#1E293B' },
+  schoolAddress: { fontSize: 14, color: '#64748B', marginTop: 4 },
+  schoolBadge: {
+    backgroundColor: '#EFF6FF',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+    marginTop: 10,
+  },
+  schoolBadgeText: { color: '#2563EB', fontSize: 12, fontWeight: '600' },
+  cardActions: {
+    flexDirection: 'row',
+    gap: 8,
+    borderTopWidth: 1,
+    borderTopColor: '#F1F5F9',
+    paddingTop: 16,
+  },
+});
