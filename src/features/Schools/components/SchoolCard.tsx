@@ -1,4 +1,4 @@
-import { useHaptic } from '@/hooks/use-hapitics';
+import { useHaptic } from '@/hooks/use-haptics';
 import { CardStyles } from '@features/Schools/styles/SchoolCard.style';
 import { School } from '@features/Schools/types/school';
 import { Box, Button, Text } from '@gluestack-ui/themed';
